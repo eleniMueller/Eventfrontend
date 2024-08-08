@@ -1,7 +1,6 @@
-// src/components/EventDetailModal.jsx
-import React from 'react';
-import {Button, Form, Input, Modal} from 'antd';
-import {useNavigate} from 'react-router-dom';
+import React, { useState } from 'react';
+import { Button, Form, Input, Modal } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import './styling/Eventlist.css';
 
 const categoryMap = {
@@ -14,15 +13,16 @@ const categoryMap = {
     7: "Öffentliche Veranstaltung"
 };
 
-const EventDetailModal = ({visible, onClose, event}) => {
+const EventDetailModal = ({ visible, onClose, event }) => {
     const [form] = Form.useForm();
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     const handleFormSubmit = (values) => {
         const fullName = `${values.firstName} ${values.lastName}`;
         const currentTimestamp = new Date().toISOString();
         const data = {
-            event_id: event.event_id,
+            eventId: event.eventId,
             name: fullName,
             email: values.email,
             rating: 0,
@@ -33,18 +33,23 @@ const EventDetailModal = ({visible, onClose, event}) => {
         console.log('Registering participant:', data);
         fetch('http://localhost:8080/participants/register', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
             .then(response => {
                 if (!response.ok) throw new Error('Failed to register');
                 console.log('Registration successful');
+                form.resetFields();
+                alert('Sie haben sich erfolgreich angemeldet!');
             })
-            .catch(error => console.error('Error registering:', error));
+            .catch(error => {
+                console.error('Error registering:', error);
+                setErrorMessage('Bei der anmeldung ist etwas fehlgeschlagen.');
+            });
     };
 
     const deleteEvent = (event) => {
-        fetch(`http://localhost:8080/events/${event.event_id}`, {method: 'DELETE'})
+        fetch(`http://localhost:8080/events/${event.event_id}`, { method: 'DELETE' })
             .then(response => {
                 if (!response.ok) throw new Error('Failed to delete event');
                 onClose();
@@ -65,7 +70,7 @@ const EventDetailModal = ({visible, onClose, event}) => {
     };
 
     const editEvent = (event) => {
-        navigate('/new-event', {state: {initialValues: event}});
+        navigate('/new-event', { state: { initialValues: event } });
     };
 
     return (
@@ -75,7 +80,7 @@ const EventDetailModal = ({visible, onClose, event}) => {
             footer={null}
             centered
             width="100%"
-            bodyStyle={{padding: 0}}
+            bodyStyle={{ padding: 0 }}
             className="event-modal"
         >
             <div className="event-detail-modal">
@@ -84,7 +89,7 @@ const EventDetailModal = ({visible, onClose, event}) => {
                     <p className="categorytext">{categoryMap[event.category_id]}</p>
                 </div>
                 <div className="modal-image">
-                    <img src={event.image} alt="Event"/>
+                    <img src={event.image} alt="Event" />
                 </div>
                 <div className="modal-content">
                     <div className="modal-description">
@@ -101,26 +106,27 @@ const EventDetailModal = ({visible, onClose, event}) => {
                         <Form form={form} onFinish={handleFormSubmit}>
                             <Form.Item
                                 name="firstName"
-                                rules={[{required: true, message: 'Bitte geben Sie Ihren Vornamen ein'}]}
+                                rules={[{ required: true, message: 'Bitte geben Sie Ihren Vornamen ein' }]}
                             >
-                                <Input placeholder="Vorname"/>
+                                <Input placeholder="Vorname" />
                             </Form.Item>
                             <Form.Item
                                 name="lastName"
-                                rules={[{required: true, message: 'Bitte geben Sie Ihren Nachnamen ein'}]}
+                                rules={[{ required: true, message: 'Bitte geben Sie Ihren Nachnamen ein' }]}
                             >
-                                <Input placeholder="Nachname"/>
+                                <Input placeholder="Nachname" />
                             </Form.Item>
                             <Form.Item
                                 name="email"
-                                rules={[{required: true, message: 'Bitte geben Sie Ihre Email ein'}]}
+                                rules={[{ required: true, message: 'Bitte geben Sie Ihre Email ein' }]}
                             >
-                                <Input placeholder="E-Mail"/>
+                                <Input placeholder="E-Mail" />
                             </Form.Item>
                             <Form.Item>
                                 <Button type="primary" htmlType="submit">Anmelden!</Button>
                             </Form.Item>
                         </Form>
+                        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
                     </div>
                 </div>
                 <div className="modal-actions">

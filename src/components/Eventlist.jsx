@@ -1,5 +1,5 @@
 // src/components/Eventlist.jsx
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Button} from 'antd';
 import {ArrowRightOutlined} from '@ant-design/icons';
 import EventDetailModal from './EventDetailModal';
