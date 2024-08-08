@@ -62,6 +62,15 @@ const Eventform = () => {
             setError('Das Datum darf nicht in der Vergangenheit liegen.');
             return;
         }
+
+        const requiredFields = ['title', 'description', 'date', 'duration', 'location', 'owner_email', 'participant_limit', 'category_id'];
+        for (const field of requiredFields) {
+            if (!formData[field]) {
+                setError('Bitte füllen Sie alle erforderlichen Felder aus.');
+                return;
+            }
+        }
+
         setError('');
         const eventData = {
             ...formData,
@@ -90,28 +99,28 @@ const Eventform = () => {
         <div>
             <h2>{initialValues.title ? 'Event bearbeiten' : 'Neues Event erfassen'}</h2>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="title">Titel</label>
+                <label htmlFor="title">Titel*</label>
                 <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} />
                 <br />
-                <label htmlFor="description">Description</label>
+                <label htmlFor="description">Description*</label>
                 <input type="text" id="description" name="description" value={formData.description} onChange={handleChange} />
                 <br />
-                <label htmlFor="date">Datum</label>
+                <label htmlFor="date">Datum*</label>
                 <input type="datetime-local" id="date" name="date" value={formData.date} onChange={handleChange} />
                 <br />
-                <label htmlFor="duration">Dauer (in Minuten)</label>
+                <label htmlFor="duration">Dauer (in Minuten)*</label>
                 <input type="number" id="duration" name="duration" value={formData.duration} onChange={handleChange} />
                 <br />
-                <label htmlFor="location">Location</label>
+                <label htmlFor="location">Location*</label>
                 <input type="text" id="location" name="location" value={formData.location} onChange={handleChange} />
                 <br />
-                <label htmlFor="owner_email">Wie Lautet deine Email?</label>
+                <label htmlFor="owner_email">Wie Lautet deine Email?*</label>
                 <input type="email" id="owner_email" name="owner_email" value={formData.owner_email} onChange={handleChange} />
                 <br />
-                <label htmlFor="participant_limit">Maximale Anzahl Teilnehmer</label>
+                <label htmlFor="participant_limit">Maximale Anzahl Teilnehmer*</label>
                 <input type="number" id="participant_limit" name="participant_limit" value={formData.participant_limit} onChange={handleChange} />
                 <br />
-                <label htmlFor="category_id">Kategorie</label>
+                <label htmlFor="category_id">Kategorie*</label>
                 <select id="category_id" name="category_id" value={formData.category_id || ''} onChange={handleChange}>
                     <option value="">Keine Kategorie</option>
                     {Object.entries(categoryMap).map(([id, name]) => (
