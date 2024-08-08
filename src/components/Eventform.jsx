@@ -24,7 +24,7 @@ const Eventform = () => {
         location: initialValues.location || '',
         owner_email: initialValues.owner_email || '',
         participant_limit: initialValues.participant_limit || '',
-        category_id: initialValues.category_id || 1,
+        category_id: initialValues.category_id || null,
         image: initialValues.image || '',
         keywords: Array.isArray(initialValues.keywords) ? initialValues.keywords : (initialValues.keywords ? initialValues.keywords.split(', ') : [])
     });
@@ -65,6 +65,7 @@ const Eventform = () => {
         setError('');
         const eventData = {
             ...formData,
+            category_id: formData.category_id || null,
             keywords: formData.keywords.join(', ')
         };
         try {
@@ -111,7 +112,8 @@ const Eventform = () => {
                 <input type="number" id="participant_limit" name="participant_limit" value={formData.participant_limit} onChange={handleChange} />
                 <br />
                 <label htmlFor="category_id">Kategorie</label>
-                <select id="category_id" name="category_id" value={formData.category_id} onChange={handleChange}>
+                <select id="category_id" name="category_id" value={formData.category_id || ''} onChange={handleChange}>
+                    <option value="">Keine Kategorie</option>
                     {Object.entries(categoryMap).map(([id, name]) => (
                         <option key={id} value={id}>{name}</option>
                     ))}
