@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, List, Button, Input } from 'antd';
+import { EditOutlined , DeleteOutlined   } from '@ant-design/icons';
 import './styling/ParticipantDetail.css';
 
 const ParticipantDetailModal = ({ visible, onClose, eventId }) => {
     const [participants, setParticipants] = useState([]);
     const [editingParticipantId, setEditingParticipantId] = useState(null);
     const [newName, setNewName] = useState('');
+    const [error, setError] = useState('');
 
     useEffect(() => {
         if (visible) {
@@ -31,9 +33,22 @@ const ParticipantDetailModal = ({ visible, onClose, eventId }) => {
     const editParticipant = (participant) => () => {
         setEditingParticipantId(participant.participant_id);
         setNewName(participant.name);
+        setError('');
+    };
+
+    const handleNameChange = (e) => {
+        setNewName(e.target.value);
+        if (e.target.value.trim()) {
+            setError('');
+        }
     };
 
     const saveParticipant = (participant) => () => {
+        if (!newName.trim()) {
+            setError('Bitte Name ausfüllen');
+            return;
+        }
+
         const updatedParticipant = { ...participant, name: newName };
         fetch(`http://localhost:8080/participants/update/${participant.participant_id}`, {
             method: 'PATCH',
@@ -49,10 +64,13 @@ const ParticipantDetailModal = ({ visible, onClose, eventId }) => {
                     ));
                     setEditingParticipantId(null);
                 } else {
-                    console.error('Failed to update participant');
+                    setError('Failed to update participant');
                 }
             })
-            .catch(error => console.error('Error updating participant:', error));
+            .catch(error => {
+                console.error('Error updating participant:', error);
+                setError('Error updating participant');
+            });
     };
 
     return (
@@ -74,8 +92,8 @@ const ParticipantDetailModal = ({ visible, onClose, eventId }) => {
                         renderItem={participant => (
                             <List.Item
                                 actions={[
-                                    <Button type="link" className="participant-edit-button" onClick={editParticipant(participant)}>Edit</Button>,
-                                    <Button type="link" className="participant-delete-button" onClick={deleteParticipant(participant)}>Delete</Button>
+                                    <Button type="link" className="participant-edit-button" icon={<EditOutlined />} onClick={editParticipant(participant)}></Button>,
+                                    <Button type="link" className="participant-delete-button" icon={<DeleteOutlined  />} onClick={deleteParticipant(participant)}></Button>
                                 ]}
                             >
                                 <List.Item.Meta
@@ -84,7 +102,7 @@ const ParticipantDetailModal = ({ visible, onClose, eventId }) => {
                                             <div>
                                                 <Input
                                                     value={newName}
-                                                    onChange={e => setNewName(e.target.value)}
+                                                    onChange={handleNameChange}
                                                     placeholder="Enter new name"
                                                 />
                                                 <Button type="primary" onClick={saveParticipant(participant)}>Save</Button>
@@ -101,6 +119,7 @@ const ParticipantDetailModal = ({ visible, onClose, eventId }) => {
                 ) : (
                     <p>No participants yet</p>
                 )}
+                {error && <p style={{ color: 'red' }}>{error}</p>}
             </div>
         </Modal>
     );
