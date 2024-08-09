@@ -1,0 +1,50 @@
+.participant-modal {
+    border-radius: 10px;
+    overflow: hidden;
+}
+.participant-detail-modal {
+    padding: 20px;
+}
+.participant-detail-modal h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.ant-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #F0F0F0;
+}
+.ant-list-item:last-child {
+    border-bottom: none;
+}
+.ant-list-item-meta-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+.ant-list-item-meta-description {
+    font-size: 14px;
+    color: #888;
+}
+.participant-detail-modal .edit-icon,
+.participant-detail-modal .delete-icon {
+    cursor: pointer;
+    font-size: 20px;
+}
+.participant-detail-modal .edit-icon {
+    color: #1890FF;
+    margin-right: 10px;
+}
+.participant-detail-modal .delete-icon {
+    color: #FF4D4F;
+}
+.participant-detail-modal .icon-container {
+    display: flex;
+    align-items: center;
+}
+.participant-detail-modal p {
+    text-align: center;
+    color: #888;
+}

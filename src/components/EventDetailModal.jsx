@@ -22,7 +22,7 @@ const EventDetailModal = ({ visible, onClose, event }) => {
         const fullName = `${values.firstName} ${values.lastName}`;
         const currentTimestamp = new Date().toISOString();
         const data = {
-            eventId: event.eventId,
+            eventId: event.event_id,
             name: fullName,
             email: values.email,
             rating: 0,
