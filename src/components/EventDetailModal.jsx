@@ -71,7 +71,7 @@ const EventDetailModal = ({ visible, onClose, event }) => {
     };
     const confirmDelete = (event) => {
         Modal.confirm({
-            title: 'Sind Sie sicher, dass Sie diesen Event löschen möchten?',
+            title: 'Sind Sie sicher, dass Sie diesen Event löschen möchten? Es werden auch alle Teilnehmer gelöscht.',
             content: 'Diese Aktion kann nicht rückgängig gemacht werden.',
             okText: 'Ja',
             cancelText: 'Nein',
