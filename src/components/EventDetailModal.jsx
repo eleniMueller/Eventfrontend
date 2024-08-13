@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Form, Input, Modal } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {Button, Form, Input, Modal} from 'antd';
+import {useNavigate} from 'react-router-dom';
 import './styling/Eventdetail.css';
 
 const categoryMap = {
@@ -12,7 +12,7 @@ const categoryMap = {
     6: "Unterhaltung",
     7: "Öffentliche Veranstaltung"
 };
-const EventDetailModal = ({ visible, onClose, event }) => {
+const EventDetailModal = ({visible, onClose, event}) => {
     const [form] = Form.useForm();
     const [errorMessage, setErrorMessage] = useState('');
     const [remainingSpots, setRemainingSpots] = useState(event.participant_limit);
@@ -45,7 +45,7 @@ const EventDetailModal = ({ visible, onClose, event }) => {
         console.log('Registering participant:', data);
         fetch('http://localhost:8080/participants/register', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
         })
             .then(response => {
@@ -61,7 +61,7 @@ const EventDetailModal = ({ visible, onClose, event }) => {
             });
     };
     const deleteEvent = (event) => {
-        fetch(`http://localhost:8080/events/${event.event_id}`, { method: 'DELETE' })
+        fetch(`http://localhost:8080/events/${event.event_id}`, {method: 'DELETE'})
             .then(response => {
                 if (!response.ok) throw new Error('Failed to delete event');
                 onClose();
@@ -80,7 +80,7 @@ const EventDetailModal = ({ visible, onClose, event }) => {
         });
     };
     const editEvent = (event) => {
-        navigate('/new-event', { state: { initialValues: event } });
+        navigate('/new-event', {state: {initialValues: event}});
     };
     return (
         <Modal
@@ -89,7 +89,7 @@ const EventDetailModal = ({ visible, onClose, event }) => {
             footer={null}
             centered
             width="100%"
-            bodyStyle={{ padding: 0 }}
+            bodyStyle={{padding: 0}}
             className="event-modal"
         >
             <div className="event-detail-modal">
@@ -98,7 +98,7 @@ const EventDetailModal = ({ visible, onClose, event }) => {
                     <p className="categorytext">{categoryMap[event.category_id]}</p>
                 </div>
                 <div className="modal-image">
-                    <img src={event.image} alt="Event" />
+                    <img src={event.image} alt="Event"/>
                 </div>
                 <div className="modal-content">
                     <div className="modal-description">
@@ -113,7 +113,7 @@ const EventDetailModal = ({ visible, onClose, event }) => {
                     </div>
                     <div className="modal-form">
                         {isFull ? (
-                            <p style={{ color: 'red' }}>Keine Plätze mehr frei</p>
+                            <p style={{color: 'red'}}>Keine Plätze mehr frei</p>
                         ) : (
                             <>
                                 <h3>Melde dich jetzt noch an!</h3>
@@ -121,23 +121,23 @@ const EventDetailModal = ({ visible, onClose, event }) => {
                                     <Form.Item
                                         required={true}
                                         name="firstName"
-                                        rules={[{ required: true, message: 'Bitte geben Sie Ihren Vornamen ein' }]}
+                                        rules={[{required: true, message: 'Bitte geben Sie Ihren Vornamen ein'}]}
                                     >
-                                        <Input placeholder="Vorname" />
+                                        <Input placeholder="Vorname"/>
                                     </Form.Item>
                                     <Form.Item
                                         required={true}
                                         name="lastName"
-                                        rules={[{ required: true, message: 'Bitte geben Sie Ihren Nachnamen ein' }]}
+                                        rules={[{required: true, message: 'Bitte geben Sie Ihren Nachnamen ein'}]}
                                     >
-                                        <Input placeholder="Nachname" />
+                                        <Input placeholder="Nachname"/>
                                     </Form.Item>
                                     <Form.Item
                                         required={true}
                                         name="email"
-                                        rules={[{ required: true, message: 'Bitte geben Sie Ihre Email ein' }]}
+                                        rules={[{required: true, message: 'Bitte geben Sie Ihre Email ein'}]}
                                     >
-                                        <Input placeholder="E-Mail" />
+                                        <Input placeholder="E-Mail"/>
                                     </Form.Item>
                                     <Form.Item>
                                         <Button type="primary" htmlType="submit">Anmelden!</Button>
@@ -145,7 +145,7 @@ const EventDetailModal = ({ visible, onClose, event }) => {
                                 </Form>
                             </>
                         )}
-                        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+                        {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
                     </div>
                 </div>
                 <div className="modal-actions">

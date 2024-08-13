@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, List, Button, Input } from 'antd';
-import { EditOutlined , DeleteOutlined   } from '@ant-design/icons';
+import React, {useEffect, useState} from 'react';
+import {Button, Input, List, Modal} from 'antd';
+import {DeleteOutlined, EditOutlined} from '@ant-design/icons';
 import './styling/ParticipantDetail.css';
 
-const ParticipantDetailModal = ({ visible, onClose, eventId }) => {
+const ParticipantDetailModal = ({visible, onClose, eventId}) => {
     const [participants, setParticipants] = useState([]);
     const [editingParticipantId, setEditingParticipantId] = useState(null);
     const [newName, setNewName] = useState('');
@@ -19,7 +19,7 @@ const ParticipantDetailModal = ({ visible, onClose, eventId }) => {
     }, [visible, eventId]);
 
     const deleteParticipant = (participant) => () => {
-        fetch(`http://localhost:8080/participants/delete/${participant.participant_id}`, { method: 'DELETE' })
+        fetch(`http://localhost:8080/participants/delete/${participant.participant_id}`, {method: 'DELETE'})
             .then(response => {
                 if (response.ok) {
                     setParticipants(participants.filter(p => p.participant_id !== participant.participant_id));
@@ -49,7 +49,7 @@ const ParticipantDetailModal = ({ visible, onClose, eventId }) => {
             return;
         }
 
-        const updatedParticipant = { ...participant, name: newName };
+        const updatedParticipant = {...participant, name: newName};
         fetch(`http://localhost:8080/participants/update/${participant.participant_id}`, {
             method: 'PATCH',
             headers: {
@@ -80,7 +80,7 @@ const ParticipantDetailModal = ({ visible, onClose, eventId }) => {
             footer={null}
             centered
             width="100%"
-            bodyStyle={{ padding: 0 }}
+            bodyStyle={{padding: 0}}
             className="participant-modal"
         >
             <div className="participant-detail-modal">
@@ -92,8 +92,10 @@ const ParticipantDetailModal = ({ visible, onClose, eventId }) => {
                         renderItem={participant => (
                             <List.Item
                                 actions={[
-                                    <Button type="link" className="participant-edit-button" icon={<EditOutlined />} onClick={editParticipant(participant)}></Button>,
-                                    <Button type="link" className="participant-delete-button" icon={<DeleteOutlined  />} onClick={deleteParticipant(participant)}></Button>
+                                    <Button type="link" className="participant-edit-button" icon={<EditOutlined/>}
+                                            onClick={editParticipant(participant)}></Button>,
+                                    <Button type="link" className="participant-delete-button" icon={<DeleteOutlined/>}
+                                            onClick={deleteParticipant(participant)}></Button>
                                 ]}
                             >
                                 <List.Item.Meta
@@ -105,7 +107,8 @@ const ParticipantDetailModal = ({ visible, onClose, eventId }) => {
                                                     onChange={handleNameChange}
                                                     placeholder="Enter new name"
                                                 />
-                                                <Button type="primary" onClick={saveParticipant(participant)}>Save</Button>
+                                                <Button type="primary"
+                                                        onClick={saveParticipant(participant)}>Save</Button>
                                             </div>
                                         ) : (
                                             participant.name
@@ -119,7 +122,7 @@ const ParticipantDetailModal = ({ visible, onClose, eventId }) => {
                 ) : (
                     <p>No participants yet</p>
                 )}
-                {error && <p style={{ color: 'red' }}>{error}</p>}
+                {error && <p style={{color: 'red'}}>{error}</p>}
             </div>
         </Modal>
     );

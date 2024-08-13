@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Button } from 'antd';
-import { ArrowRightOutlined, UserOutlined } from '@ant-design/icons';
+import React, {useState} from 'react';
+import {Button} from 'antd';
+import {ArrowRightOutlined, UserOutlined} from '@ant-design/icons';
 import EventDetailModal from './EventDetailModal';
 import ParticipantDetailModal from './ParticipantDetailModal';
 import './styling/Eventlist.css';
@@ -15,7 +15,7 @@ const categoryMap = {
     7: "Öffentliche Veranstaltung"
 };
 
-const Eventlist = ({ event }) => {
+const Eventlist = ({event}) => {
     const [isEventModalVisible, setIsEventModalVisible] = useState(false);
     const [isParticipantModalVisible, setIsParticipantModalVisible] = useState(false);
 
@@ -38,7 +38,7 @@ const Eventlist = ({ event }) => {
     return (
         <div className="event-card">
             <div className="event-image">
-                <img src={event.image} alt="Event" />
+                <img src={event.image} alt="Event"/>
             </div>
             <div className="event-details">
                 <h4>{event.title}</h4>
@@ -47,10 +47,11 @@ const Eventlist = ({ event }) => {
                 <p>Dauer: {event.duration} Minuten</p>
                 <p>Location: {event.location}</p>
             </div>
-            <Button icon={<ArrowRightOutlined />} onClick={showEventModal} />
-            <Button icon={<UserOutlined />} onClick={showParticipantModal} />
-            <EventDetailModal visible={isEventModalVisible} onClose={handleEventModalClose} event={event} />
-            <ParticipantDetailModal visible={isParticipantModalVisible} onClose={handleParticipantModalClose} eventId={event.event_id} />
+            <Button icon={<ArrowRightOutlined/>} onClick={showEventModal}/>
+            <Button icon={<UserOutlined/>} onClick={showParticipantModal}/>
+            <EventDetailModal visible={isEventModalVisible} onClose={handleEventModalClose} event={event}/>
+            <ParticipantDetailModal visible={isParticipantModalVisible} onClose={handleParticipantModalClose}
+                                    eventId={event.event_id}/>
         </div>
     );
 };
