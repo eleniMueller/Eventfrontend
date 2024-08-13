@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Input, Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import './styling/Eventlist.css';
+import './styling/Eventdetail.css';
+
 const categoryMap = {
     1: "Feier / Apéro",
     2: "Externer Anlass",

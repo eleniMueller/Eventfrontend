@@ -1,8 +1,9 @@
 .event-detail-modal {
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    background-color: #f5f5f5;
+    align-items: center;
+    padding: 20px 20px 30px;
+    background-color: #F5F5F5;
     height: 100%;
 }
 
@@ -27,16 +28,16 @@
 
 .modal-content {
     display: grid;
-    grid-template-columns: 2fr 3fr 2fr;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
     flex-grow: 1;
     margin-bottom: 20px;
 }
 
-.modal-description {
-    background-color: #dcdcdc;
-    padding: 20px;
-    font-size: 1rem;
+.modal-description,
+.modal-form {
+    width: 100%;
+    margin-left: 0;
 }
 
 .modal-description p {
@@ -46,17 +47,12 @@
 .modal-image img {
     width: 100%;
     height: auto;
-    background-color: #dcdcdc;
+    background-color: #DCDCDC;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 3rem;
     color: #666;
-}
-
-.modal-form {
-    background-color: #dcdcdc;
-    padding: 20px;
 }
 
 .modal-form h3 {
@@ -71,9 +67,8 @@
 
 .modal-actions {
     display: flex;
-    justify-content: space-between;
-}
-
-.modal-actions .ant-btn {
-    width: 48%;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0 20px;
+    padding-bottom: 30px;
 }

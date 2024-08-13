@@ -1,74 +1,21 @@
-/* src/App.css */
 .App-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: rgba(150, 110, 64, 0.74);
+  background-color: #948F88;
   color: white;
 }
-
 .App-header h2 {
   flex-grow: 1;
   text-align: center;
   margin: 0;
 }
-
 nav {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
-
-.add-event-button {
-  margin-left: auto;
-}
-
-.back-button {
-  margin-right: auto;
-}
-.add-event-button {
-  background-color: #605C4E;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-.add-event-button:hover {
-  background-color: #363020;
-}
-
-.event-row {
-  display: flex;
-  flex-direction: row;
-  margin: 10px 0;
-}
-.event-image {
-  flex: 1;
-}
-
-.App-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #ad906c;
-  color: white;
-}
-
-.App-header h2 {
-  flex-grow: 1;
-  text-align: center;
-  margin: 0;
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
 .add-event-button,
 .back-button {
   background-color: #605C4E;
@@ -77,16 +24,13 @@ nav {
   padding: 10px 20px;
   cursor: pointer;
 }
-
 .add-event-button:hover {
   background-color: #363020;
 }
-
 .event-row {
   display: flex;
   margin: 10px 0;
 }
-
 .event-card {
   display: flex;
   border: 1px solid #ccc;
@@ -96,26 +40,17 @@ nav {
   margin-left: 5%;
   background-color: #fff;
 }
-
+.event-image {
+  flex: 1;
+}
 .event-image img {
   width: 100%;
   object-fit: cover;
 }
-
 .event-details {
-  flex: 3;
+  flex: 2;
   padding-left: 20px;
 }
-
-.event-details h4 {
-  margin: 0;
-}
-
-.event-details {
-  flex: 3;
-  padding-left: 20px;
-}
-
 .event-details h4 {
   margin: 0;
 }

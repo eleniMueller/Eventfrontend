@@ -2,10 +2,12 @@
     border-radius: 10px;
     overflow: hidden;
 }
+
 .participant-detail-modal {
     padding: 20px;
     text-align: left;
 }
+
 .ant-list-item {
     display: flex;
     justify-content: space-between;
@@ -13,13 +15,16 @@
     padding: 10px 20px;
     border-bottom: 1px solid #F0F0F0;
 }
+
 .ant-list-item:last-child {
     border-bottom: none;
 }
+
 .ant-list-item-meta-title {
     font-size: 18px;
     font-weight: bold;
 }
+
 .ant-list-item-meta-description {
     font-size: 14px;
     color: #888;
